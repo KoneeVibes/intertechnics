@@ -26,7 +26,7 @@ export type BaseCarouselPropsType = {
 	autoFocus?: boolean;
 	infiniteLoop?: boolean;
 	showStatus?: boolean;
-	children: React.ReactChild[] | undefined;
+	children: React.ReactNode[] | undefined;
 };
 
 export type BaseHeroPropsType = {
