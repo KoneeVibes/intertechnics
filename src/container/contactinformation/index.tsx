@@ -25,8 +25,8 @@ export const ContactInformation = () => {
 		};
 	}, []);
 
-	const [error, setError] = useState<string | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [error] = useState<string | null>(null);
+	const [isLoading] = useState<boolean>(false);
 	const [formDetails, setFormDetails] = useState(initialFormDetails);
 
 	const handleChange = (

@@ -7,6 +7,27 @@ import starIcon from "../../asset/icon/star-icon.svg";
 import tickIcon from "../../asset/icon/tick.svg";
 import dotIcon from "../../asset/icon/dot.svg";
 
+type ThumbnailCard = {
+	index: number;
+	image: string;
+	bgColor?: string;
+	items?: string[];
+};
+
+type ListCard = {
+	index: number;
+	bgColor: string;
+	items: string[];
+	image?: string;
+};
+
+type ServiceCards = {
+	thumbnail?: ThumbnailCard;
+	services?: ListCard;
+	typicalResults?: ListCard;
+	capabilities?: ListCard;
+};
+
 export const BaseService: React.FC<BaseServicePropsType> = ({
 	introduction,
 	services,
@@ -71,23 +92,28 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 								</Box>
 							</Stack>
 							<Stack className="cards-area">
-								{Object.entries(service.cards || {}).map(([key, value]) => {
+								{(
+									Object.entries(service.cards || {}) as [
+										keyof ServiceCards,
+										ServiceCards[keyof ServiceCards],
+									][]
+								).map(([key, value]) => {
 									return (
 										<Fragment>
 											{key === "thumbnail" && (
 												<Box
 													component={"div"}
-													sx={{ order: value.index }}
+													sx={{ order: value?.index }}
 													className="thumbnail-box"
 												>
-													<img src={value.image} alt={service.title} />
+													<img src={value?.image} alt={service.title} />
 												</Box>
 											)}
 											{key === "services" && (
 												<Stack
 													sx={{
-														order: value.index,
-														backgroundColor: value.bgColor,
+														order: value?.index,
+														backgroundColor: value?.bgColor,
 													}}
 													className="services-list"
 												>
@@ -108,7 +134,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 														</Typography>
 													</Box>
 													<Box component={"ul"} className="service-items-list">
-														{value.items.map((item, id) => {
+														{value?.items?.map((item, id) => {
 															return (
 																<Stack className="service-item">
 																	<Box
@@ -149,8 +175,8 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 											{key === "typicalResults" && (
 												<Stack
 													sx={{
-														order: value.index,
-														backgroundColor: value.bgColor,
+														order: value?.index,
+														backgroundColor: value?.bgColor,
 													}}
 													className="typical-results"
 												>
@@ -179,7 +205,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 														</Box>
 													</Stack>
 													<Box component={"ul"} className="result-items-list">
-														{value.items.map((item, id) => {
+														{value?.items?.map((item, id) => {
 															return (
 																<Stack className="result-item">
 																	<Box
@@ -220,8 +246,8 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 											{key === "capabilities" && (
 												<Stack
 													sx={{
-														order: value.index,
-														backgroundColor: value.bgColor,
+														order: value?.index,
+														backgroundColor: value?.bgColor,
 													}}
 													className="capabilities"
 												>
@@ -250,7 +276,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 														</Box>
 													</Stack>
 													<Box component={"ul"} className="capabilities-list">
-														{value.items.map((item, id) => {
+														{value?.items?.map((item, id) => {
 															return (
 																<Stack className="capability-item">
 																	<Box
