@@ -18,6 +18,7 @@ export const FooterWrapper = styled(Stack)(({ theme }) => {
 					gap: "calc(var(--flex-gap)/9)",
 					"& .link-stack-item": {
 						overflow: "hidden",
+						cursor: "pointer",
 					},
 				},
 			},

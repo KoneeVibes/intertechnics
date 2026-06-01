@@ -17,7 +17,7 @@ export const PipelineIntegrity = () => {
 			<Navigation />
 			<BaseHero
 				title="Pipeline Integrity"
-				subtitle="GHG auditing, LDAR, emissions reduction strategies and decarbonization roadmaps."
+				subtitle="Inspection, risk assessment, corrosion control, leak detection, and regulatory compliance to ensure safe, reliable, and long-term pipeline operation."
 				image={pipelineIntegrityBg}
 			/>
 			<BaseService

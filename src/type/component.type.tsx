@@ -30,17 +30,17 @@ export type BaseCarouselPropsType = {
 };
 
 export type BaseHeroPropsType = {
-	title?: string;
+	title?: string | number;
 	subtitle?: string;
-	image?: string;
+	image?: string | number;
 	callToAction?: React.ReactNode;
 };
 
 export type BaseServicePropsType = {
 	introduction?: string;
-	services?: Record<string, any>[];
+	services?: Record<string, string | number>[];
 };
 
 export type BaseBlogPropsType = {
-	message?: string;
+	message?: string | number;
 };

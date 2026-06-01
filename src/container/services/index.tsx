@@ -60,7 +60,7 @@ export const Services = () => {
 						</Typography>
 					</Box>
 				</Stack>
-				<Stack className="learn-more-CTA">
+				{/* <Stack className="learn-more-CTA">
 					<Box component={"div"} className="learn-more-CTA-content">
 						<Typography
 							variant="h6"
@@ -69,8 +69,8 @@ export const Services = () => {
 								fontWeight: 500,
 								fontSize: 15,
 								lineHeight: "normal",
-								color: "var(--light-color)",
-							}}
+                                color: "var(--light-color)",
+                            }}   
 						>
 							Learn More
 						</Typography>
@@ -91,7 +91,7 @@ export const Services = () => {
 							<ArrowForwardIcon />
 						</IconButton>
 					</Box>
-				</Stack>
+				</Stack> */}
 			</Stack>
 			<Grid container spacing={"calc(var(--flex-gap)/3)"}>
 				{serviceBrochure.map((service, index) => {

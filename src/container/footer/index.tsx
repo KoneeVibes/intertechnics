@@ -1,8 +1,19 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { FooterWrapper } from "./styled";
 import { footerLinks } from "../../config/static";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
+	const navigate = useNavigate();
+
+	const handleNavigation = (
+		e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+		item: Record<string, string | number>,
+	) => {
+		e.preventDefault();
+		return navigate(`${item.url}`);
+	};
+
 	return (
 		<FooterWrapper>
 			<Stack className="upper-section">
@@ -31,6 +42,10 @@ export const Footer = () => {
 											key={index}
 											component={"div"}
 											className="link-stack-item"
+											onClick={(e) => {
+												if (key === "Connect") return;
+												handleNavigation(e, link);
+											}}
 										>
 											<Typography
 												variant="subtitle1"

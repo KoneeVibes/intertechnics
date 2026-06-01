@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 export const BaseBlog: React.FC<BaseBlogPropsType> = ({ message }) => {
 	const paragraphs = message
-		? message
+		? String(message)
 				.split(/\r?\n\s*\r?\n/)
 				.map((paragraph: string) => paragraph.trim())
 				.filter(Boolean)
@@ -30,9 +30,10 @@ export const BaseBlog: React.FC<BaseBlogPropsType> = ({ message }) => {
 							color: "var(--dark-color-variant-I)",
 							whiteSpace: "pre-line",
 						}}
-					>
-						{content}
-					</Typography>
+						dangerouslySetInnerHTML={{
+							__html: content.replace(/\n/g, "<br />"),
+						}}
+					/>
 				</Box>
 			))}
 		</BaseBlogWrapper>

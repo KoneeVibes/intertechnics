@@ -4,14 +4,15 @@ import emailIcon from "../../asset/icon/email.svg";
 import phoneIcon from "../../asset/icon/phone.svg";
 import hourIcon from "../../asset/icon/hours.svg";
 import addressIcon from "../../asset/icon/address.svg";
-import calendarIcon from "../../asset/icon/calendar.svg";
-import downloadIcon from "../../asset/icon/download.svg";
-import proposalIcon from "../../asset/icon/proposal.svg";
+// import calendarIcon from "../../asset/icon/calendar.svg";
+// import downloadIcon from "../../asset/icon/download.svg";
+// import proposalIcon from "../../asset/icon/proposal.svg";
 import { BaseFieldSet } from "../../component/form/fieldset/styled";
 import { BaseLabel } from "../../component/form/label/styled";
 import { useMemo, useState } from "react";
 import { BaseInput } from "../../component/form/input/styled";
 import { BaseButton } from "../../component/button/styled";
+import emailjs from "@emailjs/browser";
 
 export const ContactInformation = () => {
 	const initialFormDetails = useMemo(() => {
@@ -20,13 +21,12 @@ export const ContactInformation = () => {
 			email: "",
 			phone: "",
 			company: "",
-			serviceInterest: "",
 			message: "",
 		};
 	}, []);
 
-	const [error] = useState<string | null>(null);
-	const [isLoading] = useState<boolean>(false);
+	const [error, setError] = useState<string | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [formDetails, setFormDetails] = useState(initialFormDetails);
 
 	const handleChange = (
@@ -40,6 +40,28 @@ export const ContactInformation = () => {
 			...prev,
 			[name]: value,
 		}));
+	};
+
+	const handleContactFormSubmit = async (
+		e: React.FormEvent<HTMLFormElement>,
+	) => {
+		e.preventDefault();
+		setError(null);
+		setIsLoading(true);
+		try {
+			await emailjs.send(
+				import.meta.env.VITE_EMAILJS_SERVICE_ID,
+				import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+				formDetails,
+				import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+			);
+			alert("Message sent successfully!");
+		} catch (error) {
+			console.error(error);
+			alert("Failed to send message.");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -140,7 +162,7 @@ export const ContactInformation = () => {
 										color: "var(--input-field-color)",
 									}}
 								>
-									Available upon request
+									+234(0)9063391833
 								</Typography>
 							</Box>
 						</Stack>
@@ -245,7 +267,7 @@ export const ContactInformation = () => {
 						</Stack>
 					</Stack>
 				</Stack>
-				<Stack className="connection-methods">
+				{/* <Stack className="connection-methods">
 					<Stack className="connection-method">
 						<Box component={"div"} className="icon-box">
 							<img src={calendarIcon} alt="Calendar Icon" />
@@ -369,9 +391,13 @@ export const ContactInformation = () => {
 							</Box>
 						</Stack>
 					</Stack>
-				</Stack>
+				</Stack> */}
 			</Stack>
-			<Stack className="right-stack">
+			<Stack
+				className="right-stack"
+				component={"form"}
+				onSubmit={handleContactFormSubmit}
+			>
 				<Box component={"div"} className="stack-header">
 					<Typography
 						variant="h3"
@@ -447,16 +473,6 @@ export const ContactInformation = () => {
 								name="company"
 								placeholder="Your organization"
 								value={formDetails.company}
-								onChange={(e) => handleChange(e)}
-							/>
-						</BaseFieldSet>
-					</Grid>
-					<Grid sx={{ overflow: "hidden" }} size={12}>
-						<BaseFieldSet>
-							<BaseLabel>How can we help you?</BaseLabel>
-							<BaseInput
-								name="serviceInterest"
-								value={formDetails.serviceInterest}
 								onChange={(e) => handleChange(e)}
 							/>
 						</BaseFieldSet>

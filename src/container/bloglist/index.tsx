@@ -1,12 +1,45 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { BloglistWrapper } from "./styled";
-import { blogs } from "../../config/static";
 import blogIcon from "../../asset/icon/blog.svg";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const Bloglist = () => {
+	const API_KEY = import.meta.env.VITE_API_KEY;
+	const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
+	const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
+
 	const navigate = useNavigate();
+
+	const [liveBlogs, setLiveBlogs] = useState<
+		Array<Record<string, string | number>>
+	>([]);
+
+	useEffect(() => {
+		const retrieveAllBlogService = async () => {
+			try {
+				const response = await fetch(
+					`${API_ENDPOINT}/public/blog/${PROJECT_KEY}`,
+					{
+						method: "GET",
+						headers: {
+							Authorization: `APIKey ${API_KEY}`,
+							"Content-Type": "application/json",
+						},
+					},
+				);
+				const res = await response.json();
+				if (!response.ok) {
+					console.error("Error:", res);
+				}
+				return setLiveBlogs(res.data);
+			} catch (error) {
+				console.error("API fetch error:", error);
+			}
+		};
+		retrieveAllBlogService();
+	}, [API_KEY, PROJECT_KEY, API_ENDPOINT]);
 
 	const handleNavigateToBlogPost = (
 		e:
@@ -38,7 +71,7 @@ export const Bloglist = () => {
 				</Typography>
 			</Box>
 			<Stack className="blog-list">
-				{blogs.map((blog, index) => {
+				{liveBlogs.map((blog, index) => {
 					return (
 						<Stack
 							component={"div"}
@@ -47,27 +80,29 @@ export const Bloglist = () => {
 							onClick={(e) => handleNavigateToBlogPost(e, blog.id)}
 						>
 							<Stack className="left-stack">
-								<Box>
+								<Box component={"div"} className="icon-box">
 									<img src={blogIcon} alt="Blog Icon" />
 								</Box>
 								<Stack className="title-area">
-									<Box>
-										<Typography
-											variant="subtitle1"
-											sx={{
-												fontFamily: "Inter",
-												fontWeight: 500,
-												fontSize: {
-													mobile: 12,
-												},
-												lineHeight: "normal",
-												whiteSpace: "normal",
-												color: "var(--dark-color-variant-XIV)",
-											}}
-										>
-											{blog.category}
-										</Typography>
-									</Box>
+									{blog.category && (
+										<Box>
+											<Typography
+												variant="subtitle1"
+												sx={{
+													fontFamily: "Inter",
+													fontWeight: 500,
+													fontSize: {
+														mobile: 12,
+													},
+													lineHeight: "normal",
+													whiteSpace: "normal",
+													color: "var(--dark-color-variant-XIV)",
+												}}
+											>
+												{blog.category}
+											</Typography>
+										</Box>
+									)}
 									<Box>
 										<Typography
 											variant="h5"

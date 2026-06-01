@@ -11,38 +11,44 @@ import { Consulting } from "./page/services/consulting";
 import { PipelineIntegrity } from "./page/services/pipelineintegrity";
 import { PressureVessels } from "./page/services/pressurevessels";
 import { BlogPost } from "./page/blogpost";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<Router>
-				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/contact-us" element={<Contact />} />
-				<Route path="/insights-resources" element={<Resources />} />
-				<Route
-					path="/services/oil-well-operation"
-					element={<OilWellOperations />}
-				/>
-				<Route
-					path="/services/asset-integrity-management"
-					element={<AssetIntegrityManagement />}
-				/>
-				<Route
-					path="/services/training-and-manpower"
-					element={<TrainingAndManpower />}
-				/>
-				<Route path="/services/consulting-services" element={<Consulting />} />
-				<Route
-					path="/services/pipeline-integrity"
-					element={<PipelineIntegrity />}
-				/>
-				<Route
-					path="/services/pressure-vessels"
-					element={<PressureVessels />}
-				/>
-				<Route path="/blog/:id" element={<BlogPost />} />
-			</Router>
+			<ScrollToTop>
+				<Router>
+					<Route path="/" element={<Home />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/contact-us" element={<Contact />} />
+					<Route path="/insights-resources" element={<Resources />} />
+					<Route
+						path="/services/oil-well-operation"
+						element={<OilWellOperations />}
+					/>
+					<Route
+						path="/services/asset-integrity-management"
+						element={<AssetIntegrityManagement />}
+					/>
+					<Route
+						path="/services/training-and-manpower"
+						element={<TrainingAndManpower />}
+					/>
+					<Route
+						path="/services/consulting-services"
+						element={<Consulting />}
+					/>
+					<Route
+						path="/services/pipeline-integrity"
+						element={<PipelineIntegrity />}
+					/>
+					<Route
+						path="/services/pressure-vessels"
+						element={<PressureVessels />}
+					/>
+					<Route path="/blog/:id" element={<BlogPost />} />
+				</Router>
+			</ScrollToTop>
 		</BrowserRouter>
 	);
 }

@@ -16,8 +16,8 @@ export const PressureVessels = () => {
 		>
 			<Navigation />
 			<BaseHero
-				title="Pressure vessels NDT Testing "
-				subtitle="Reliable, cost-effective delivery of materials, equipment, and services."
+				title="Pressure vessels integrity"
+				subtitle="Pressure equipment integrity assurance to maintain safe and compliant operation of static assets."
 				image={pressureVesselsBg}
 			/>
 			<BaseService

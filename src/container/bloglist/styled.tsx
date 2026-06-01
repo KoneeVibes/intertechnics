@@ -21,6 +21,7 @@ export const BloglistWrapper = styled(Stack)(({ theme }) => {
 					alignItems: "center",
 					gap: "calc(var(--flex-gap)/6)",
 					overflow: "hidden",
+					"& .icon-box": { display: "flex" },
 					"& .title-area": {
 						gap: "calc(var(--flex-gap)/18)",
 						overflow: "hidden",

@@ -46,7 +46,8 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 							fontSize: 20,
 							lineHeight: "normal",
 							color: "var(--input-field-color)",
-							textAlign: "center",
+                            textAlign: "center",
+                            whiteSpace: "normal"
 						}}
 					>
 						{introduction}
