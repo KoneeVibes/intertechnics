@@ -1,4 +1,5 @@
 import type { FormLabelProps, InputBaseProps } from "@mui/material";
+import type React from "react";
 
 export type BaseTypographyType = {
 	fontsize?: string;
@@ -38,7 +39,7 @@ export type BaseHeroPropsType = {
 
 export type BaseServicePropsType = {
 	introduction?: string;
-	services?: Record<string, string | number>[];
+	services?: Record<string, unknown>[];
 };
 
 export type BaseBlogPropsType = {

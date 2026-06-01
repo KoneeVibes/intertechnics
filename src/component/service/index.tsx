@@ -46,8 +46,8 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 							fontSize: 20,
 							lineHeight: "normal",
 							color: "var(--input-field-color)",
-                            textAlign: "center",
-                            whiteSpace: "normal"
+							textAlign: "center",
+							whiteSpace: "normal",
 						}}
 					>
 						{introduction}
@@ -73,7 +73,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 											color: "var(--dark-color-variant-I)",
 										}}
 									>
-										{service.title}
+										{service.title as string}
 									</Typography>
 								</Box>
 								<Box>
@@ -88,7 +88,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 											whiteSpace: "normal",
 										}}
 									>
-										{service.body}
+										{service.body as string}
 									</Typography>
 								</Box>
 							</Stack>
@@ -107,7 +107,7 @@ export const BaseService: React.FC<BaseServicePropsType> = ({
 													sx={{ order: value?.index }}
 													className="thumbnail-box"
 												>
-													<img src={value?.image} alt={service.title} />
+													<img src={value?.image} alt={String(service.title)} />
 												</Box>
 											)}
 											{key === "services" && (
